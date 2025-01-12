@@ -1,18 +1,18 @@
 package Soal5.model;
 
 public class AlatCamping {
-    private String namaAlat;
+    private String nama;
     private String jenis;
     private double hargaPerHari;
 
-    public AlatCamping(String namaAlat, String jenis, double hargaPerHari) {
-        this.namaAlat = namaAlat;
+    public AlatCamping(String nama, String jenis, double hargaPerHari) {
+        this.nama = nama;
         this.jenis = jenis;
         this.hargaPerHari = hargaPerHari;
     }
 
-    public String getNamaAlat() {
-        return namaAlat;
+    public String getNama() {
+        return nama;
     }
 
     public String getJenis() {
