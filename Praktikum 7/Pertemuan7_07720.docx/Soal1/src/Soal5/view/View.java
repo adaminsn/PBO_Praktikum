@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class View extends JFrame {
-    private JTextField txtNamaAlat, txtJenis, txtHarga, txtDurasiSewa;
+    private JTextField txtNamaPenyewa, txtNamaAlat, txtJenis, txtHarga, txtJumlah, txtDurasi;
     private JButton btnTambah, btnHitung, btnBatal;
     private JTextArea textArea;
 
@@ -16,7 +16,11 @@ public class View extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(5, 2, 10, 10));
+        inputPanel.setLayout(new GridLayout(6, 2, 10, 10));
+
+        inputPanel.add(new JLabel("Nama Penyewa:"));
+        txtNamaPenyewa = new JTextField();
+        inputPanel.add(txtNamaPenyewa);
 
         inputPanel.add(new JLabel("Nama Alat:"));
         txtNamaAlat = new JTextField();
@@ -30,13 +34,17 @@ public class View extends JFrame {
         txtHarga = new JTextField();
         inputPanel.add(txtHarga);
 
+        inputPanel.add(new JLabel("Jumlah Alat:"));
+        txtJumlah = new JTextField();
+        inputPanel.add(txtJumlah);
+
         inputPanel.add(new JLabel("Durasi Sewa (Hari):"));
-        txtDurasiSewa = new JTextField();
-        inputPanel.add(txtDurasiSewa);
+        txtDurasi = new JTextField();
+        inputPanel.add(txtDurasi);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         btnTambah = new JButton("Tambah Alat");
-        btnHitung = new JButton("Hitung Harga");
+        btnHitung = new JButton("Hitung Total");
         btnBatal = new JButton("Batal");
         buttonPanel.add(btnTambah);
         buttonPanel.add(btnHitung);
@@ -53,6 +61,10 @@ public class View extends JFrame {
         setVisible(true);
     }
 
+    public String getNamaPenyewa() {
+        return txtNamaPenyewa.getText();
+    }
+
     public String getNamaAlat() {
         return txtNamaAlat.getText();
     }
@@ -65,16 +77,25 @@ public class View extends JFrame {
         try {
             return Double.parseDouble(txtHarga.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Harga harus berupa angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            tampilkanPesan("Harga harus berupa angka.");
             return 0;
         }
     }
 
-    public int getDurasiSewa() {
+    public int getJumlah() {
         try {
-            return Integer.parseInt(txtDurasiSewa.getText());
+            return Integer.parseInt(txtJumlah.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Durasi sewa harus berupa angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            tampilkanPesan("Jumlah harus berupa angka.");
+            return 0;
+        }
+    }
+
+    public int getDurasi() {
+        try {
+            return Integer.parseInt(txtDurasi.getText());
+        } catch (NumberFormatException e) {
+            tampilkanPesan("Durasi harus berupa angka.");
             return 0;
         }
     }
@@ -95,9 +116,9 @@ public class View extends JFrame {
         textArea.append(pesan + "\n");
     }
 
-    public void tambahListener(ActionListener listener) {
-        btnTambah.addActionListener(listener);
-        btnHitung.addActionListener(listener);
-        btnBatal.addActionListener(listener);
+    public void tambahListener(ActionListener actionListener) {
+        btnTambah.addActionListener(actionListener);
+        btnHitung.addActionListener(actionListener);
+        btnBatal.addActionListener(actionListener);
     }
 }
