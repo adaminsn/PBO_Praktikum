@@ -1,27 +1,23 @@
 package Soal5.model;
 
-import java.util.ArrayList;
-
 public class ItemSewa {
-    private ArrayList<AlatCamping> daftarAlat;
+    private AlatCamping alatSewa;
+    private int jumlah;
 
-    public ItemSewa() {
-        this.daftarAlat = new ArrayList<>();
+    public ItemSewa(AlatCamping alatSewa, int jumlah) {
+        this.alatSewa = alatSewa;
+        this.jumlah = jumlah;
     }
 
-    public void tambahAlat(AlatCamping alat) {
-        daftarAlat.add(alat);
+    public AlatCamping getAlatSewa() {
+        return alatSewa;
     }
 
-    public ArrayList<AlatCamping> getDaftarAlat() {
-        return daftarAlat;
+    public int getJumlah() {
+        return jumlah;
     }
 
-    public double hitungTotalHarga(int durasiSewa) {
-        double totalHarga = 0;
-        for (AlatCamping alat : daftarAlat) {
-            totalHarga += alat.getHargaPerHari() * durasiSewa;
-        }
-        return totalHarga;
+    public double hitungSubtotal(int durasi) {
+        return alatSewa.getHargaPerHari() * jumlah * durasi;
     }
 }
